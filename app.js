@@ -506,9 +506,7 @@ function renderChecklist() {
                     <div class="pill-name">${pillData.name} <span style="font-size:0.8rem; font-weight:normal; color:var(--text-secondary)">(${pillData.brand})</span></div>
                     <div class="pill-meta">
                         <span><strong>الجرعة:</strong> ${pillData.dose}</span>
-                        <span>•</span>
                         <span>${pill.note}</span>
-                        <span>•</span>
                         <span class="pill-target">${pillData.target}</span>
                     </div>
                 </div>

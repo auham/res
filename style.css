@@ -69,7 +69,14 @@ body {
     line-height: 1.6;
     transition: background-color var(--transition-normal), color var(--transition-normal);
     min-height: 100vh;
-    padding: 24px;
+    padding: 16px;
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 8px;
+        padding-bottom: 80px; /* space for bottom nav bar */
+    }
 }
 
 /* Scrollbar styling */
@@ -213,7 +220,7 @@ body.dark-theme .light-icon { display: none; }
     align-items: start;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
@@ -833,4 +840,243 @@ body.dark-theme .light-icon { display: none; }
     border-top: 1px solid var(--card-border);
     padding-top: 20px;
     margin-top: 16px;
+}
+
+/* ======================================================
+   MOBILE-FIRST RESPONSIVE OVERHAUL
+   ====================================================== */
+
+@media (max-width: 640px) {
+
+    /* --- App Container --- */
+    .app-container {
+        gap: 12px;
+    }
+
+    /* --- Header: compact on mobile --- */
+    .main-header {
+        padding: 16px;
+        gap: 16px;
+        border-radius: var(--border-radius-md);
+    }
+
+    .header-content {
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .logo-area .icon {
+        font-size: 2rem;
+    }
+
+    .logo-area h1 {
+        font-size: 1.25rem;
+    }
+
+    .logo-area .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .theme-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .global-progress-card {
+        padding: 12px 16px;
+    }
+
+    .progress-info {
+        font-size: 0.85rem;
+    }
+
+    /* --- Cards --- */
+    .card {
+        padding: 16px;
+        border-radius: var(--border-radius-md);
+    }
+
+    .card h2 {
+        font-size: 1.05rem;
+        gap: 8px;
+    }
+
+    /* --- Week selector: 8 per row on mobile (compact circles) --- */
+    .weeks-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 8px;
+    }
+
+    .week-btn {
+        font-size: 0.8rem;
+        min-height: 36px;
+    }
+
+    /* --- Stage Info --- */
+    .stage-info-card {
+        margin-top: 12px;
+        padding-right: 14px;
+    }
+
+    .stage-description {
+        font-size: 0.88rem;
+    }
+
+    /* --- Tracker Header: stack vertically --- */
+    .tracker-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+    }
+
+    /* --- Days Row: scrollable horizontal strip --- */
+    .days-row {
+        gap: 6px;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .day-btn {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        min-height: 36px;
+    }
+
+    /* --- Progress bar row --- */
+    .checklist-progress-container {
+        font-size: 0.8rem;
+        gap: 8px;
+        padding: 8px 12px;
+        flex-wrap: wrap;
+    }
+
+    /* --- Schedule group timeline --- */
+    .schedule-group {
+        padding-right: 14px;
+    }
+
+    .schedule-time {
+        font-size: 0.85rem;
+    }
+
+    /* --- Checklist items: more compact, tap-friendly --- */
+    .checklist-item {
+        padding: 12px;
+        gap: 12px;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .checklist-details .pill-name {
+        font-size: 0.95rem;
+    }
+
+    .checklist-details .pill-meta {
+        font-size: 0.78rem;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .checklist-details .pill-meta span {
+        display: block;
+    }
+
+    /* Hide separator dots on mobile */
+    .checklist-details .pill-meta span:not(.pill-target):not(:first-child)::before {
+        display: none;
+    }
+
+    /* --- Diet Guide: stack to single column --- */
+    .diet-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .diet-header h2 {
+        font-size: 1rem;
+    }
+
+    .search-box input {
+        font-size: 0.9rem;
+        padding: 10px 14px 10px 44px;
+    }
+
+    .diet-split-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .diet-item {
+        font-size: 0.88rem;
+        padding: 6px 10px;
+    }
+
+    /* --- Supplement Cards: single column --- */
+    .supplements-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .supplement-card {
+        padding: 16px;
+    }
+
+    .supp-card-header h3 {
+        font-size: 1rem;
+    }
+
+    .supp-details-list {
+        font-size: 0.85rem;
+    }
+
+    .supp-card-target {
+        font-size: 0.82rem;
+    }
+
+    /* --- Footer --- */
+    .app-footer {
+        font-size: 0.78rem;
+        padding-bottom: 8px;
+    }
+
+    /* Sidebar: remove sticky, appear naturally above content */
+    .sidebar {
+        order: -1;
+    }
+}
+
+/* Slightly larger phones and tablets */
+@media (min-width: 641px) and (max-width: 1024px) {
+    body {
+        padding: 16px;
+    }
+
+    .main-header {
+        padding: 24px;
+    }
+
+    .logo-area h1 {
+        font-size: 1.5rem;
+    }
+
+    .weeks-grid {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 10px;
+    }
+
+    .week-btn {
+        font-size: 0.85rem;
+    }
+
+    .diet-split-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .supplements-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
 }
