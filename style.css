@@ -836,6 +836,506 @@ body.dark-theme .light-icon { display: none; }
     margin-top: auto;
 }
 
+
+/* ======================================================
+   LOW FODMAP SEARCH SECTION
+   ====================================================== */
+
+/* FODMAP Card — extra top accent */
+.fodmap-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.fodmap-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+/* Header area */
+.fodmap-header-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-top: 8px;
+}
+
+.fodmap-title-block h2 {
+    font-size: 1.4rem;
+}
+
+.fodmap-intro {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-top: 6px;
+}
+
+.fodmap-intro strong {
+    color: var(--primary-color);
+}
+
+/* Legend */
+.fodmap-legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.legend-low {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.legend-mod {
+    background: rgba(245, 158, 11, 0.12);
+    color: #d97706;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.legend-high {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+body.dark-theme .legend-low {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border-color: rgba(16, 185, 129, 0.25);
+}
+
+body.dark-theme .legend-mod {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.25);
+}
+
+body.dark-theme .legend-high {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* Search Box */
+.fodmap-search-wrapper {
+    margin-bottom: 20px;
+}
+
+.fodmap-search-box {
+    position: relative;
+    max-width: 100%;
+}
+
+.fodmap-search-box input {
+    width: 100%;
+    padding: 16px 20px 16px 52px;
+    border-radius: var(--border-radius-md);
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: 1.05rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.fodmap-search-box input::placeholder {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.fodmap-search-box input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.15), 0 4px 12px rgba(20, 184, 166, 0.1);
+}
+
+.fodmap-search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    pointer-events: none;
+}
+
+/* Category Chips */
+.fodmap-chips-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.fodmap-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 24px;
+    border: 1.5px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.fodmap-chip:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.fodmap-chip.active {
+    background: var(--primary-gradient);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 3px 10px rgba(20, 184, 166, 0.3);
+}
+
+.fodmap-chip.active .chip-icon {
+    filter: grayscale(0);
+}
+
+.chip-icon {
+    font-size: 1.05rem;
+}
+
+/* Stats Bar */
+.fodmap-stats-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-sm);
+}
+
+.stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.stat-low {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+}
+
+.stat-mod {
+    background: rgba(245, 158, 11, 0.12);
+    color: #d97706;
+}
+
+.stat-high {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+}
+
+.stat-total {
+    background: var(--card-border);
+    color: var(--text-secondary);
+}
+
+body.dark-theme .stat-low { color: #34d399; background: rgba(16,185,129,0.15); }
+body.dark-theme .stat-mod { color: #fbbf24; background: rgba(245,158,11,0.15); }
+body.dark-theme .stat-high { color: #f87171; background: rgba(239,68,68,0.15); }
+
+/* Results Grid */
+.fodmap-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+/* Result Card */
+.fodmap-result-card {
+    background: var(--input-bg);
+    border: 2px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all var(--transition-fast);
+    animation: fodmapCardIn 0.35s ease-out both;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fodmapCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.fodmap-result-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Left accent stripe on cards */
+.fodmap-result-card.fodmap-low {
+    border-right: 4px solid #10b981;
+}
+
+.fodmap-result-card.fodmap-moderate {
+    border-right: 4px solid #f59e0b;
+}
+
+.fodmap-result-card.fodmap-high {
+    border-right: 4px solid #ef4444;
+}
+
+.fodmap-result-card.fodmap-low:hover {
+    border-color: #10b981;
+}
+
+.fodmap-result-card.fodmap-moderate:hover {
+    border-color: #f59e0b;
+}
+
+.fodmap-result-card.fodmap-high:hover {
+    border-color: #ef4444;
+}
+
+/* Card Top Row */
+.fodmap-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fodmap-cat-icon {
+    font-size: 1.6rem;
+}
+
+/* Level Badge */
+.level-badge {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+}
+
+.level-low {
+    background: rgba(16, 185, 129, 0.14);
+    color: #059669;
+}
+
+.level-moderate {
+    background: rgba(245, 158, 11, 0.14);
+    color: #d97706;
+}
+
+.level-high {
+    background: rgba(239, 68, 68, 0.14);
+    color: #dc2626;
+}
+
+body.dark-theme .level-low { color: #34d399; background: rgba(16,185,129,0.2); }
+body.dark-theme .level-moderate { color: #fbbf24; background: rgba(245,158,11,0.2); }
+body.dark-theme .level-high { color: #f87171; background: rgba(239,68,68,0.2); }
+
+/* Card Body */
+.fodmap-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fodmap-food-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.fodmap-food-name mark {
+    background: rgba(20, 184, 166, 0.25);
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 3px;
+}
+
+.fodmap-food-name-en {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-style: italic;
+    direction: ltr;
+    text-align: right;
+}
+
+.fodmap-type-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: rgba(100, 116, 139, 0.1);
+    color: var(--text-secondary);
+    margin-top: 4px;
+    align-self: flex-start;
+}
+
+.fodmap-type-tag strong {
+    color: var(--text-primary);
+}
+
+.fodmap-note {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--card-border);
+}
+
+/* Empty State */
+.fodmap-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+    gap: 12px;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
+.fodmap-empty-state h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.fodmap-empty-state p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ======================================================
+   FODMAP MOBILE RESPONSIVE
+   ====================================================== */
+@media (max-width: 640px) {
+    .fodmap-header-area {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .fodmap-title-block h2 {
+        font-size: 1.1rem;
+    }
+
+    .fodmap-intro {
+        font-size: 0.85rem;
+    }
+
+    .fodmap-legend {
+        gap: 6px;
+    }
+
+    .legend-item {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+
+    .fodmap-search-box input {
+        font-size: 0.95rem;
+        padding: 14px 16px 14px 44px;
+    }
+
+    .fodmap-search-icon {
+        font-size: 1.1rem;
+        right: 14px;
+    }
+
+    .fodmap-chips-row {
+        gap: 6px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+    }
+
+    .fodmap-chip {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .fodmap-stats-bar {
+        gap: 6px;
+        padding: 10px 12px;
+    }
+
+    .stat-pill {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+
+    .fodmap-results-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .fodmap-result-card {
+        padding: 14px;
+    }
+
+    .fodmap-food-name {
+        font-size: 1rem;
+    }
+
+    .fodmap-empty-state {
+        padding: 32px 16px;
+    }
+}
+
 /* App Footer */
 .app-footer {
     text-align: center;
@@ -1088,4 +1588,393 @@ body.dark-theme .light-icon { display: none; }
 @keyframes toastIn {
     from { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.9); }
     to   { opacity: 1; transform: translateX(-50%) translateY(0)   scale(1); }
+}
+
+/* ======================================================
+   TABS NAVIGATION SYSTEM
+   ====================================================== */
+.app-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: var(--glass-blur);
+    padding: 8px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 8px;
+}
+
+.nav-tab {
+    flex: 1;
+    max-width: 260px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 12px 24px;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    outline: none;
+}
+
+.nav-tab:hover {
+    color: var(--primary-color);
+    background: rgba(20, 184, 166, 0.08);
+}
+
+.nav-tab.active {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.25);
+}
+
+/* Tab content states */
+.tab-content {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.active-tab {
+    display: block !important;
+    animation: tabFadeIn 0.4s ease-out forwards;
+}
+
+.hidden-tab {
+    display: none !important;
+}
+
+@keyframes tabFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======================================================
+   COOKING RECIPES SECTION
+   ====================================================== */
+.recipes-card {
+    position: relative;
+    overflow: hidden;
+    margin-top: 24px;
+}
+
+.recipes-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #f59e0b, #0d9488, #10b981);
+}
+
+.recipes-header {
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 24px;
+}
+
+.recipe-card {
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: all var(--transition-fast);
+}
+
+.recipe-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.recipe-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.recipe-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.recipe-icon-el {
+    font-size: 2rem;
+}
+
+.recipe-title-group h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.recipe-badge {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+body.dark-theme .recipe-badge {
+    background: rgba(16, 185, 129, 0.16);
+    color: #34d399;
+}
+
+.recipe-meta-row {
+    display: flex;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-bottom: 1px dashed var(--card-border);
+    padding-bottom: 12px;
+}
+
+.recipe-details-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recipe-details-section h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.recipe-ingredients-list {
+    list-style: none;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--card-bg);
+    padding: 12px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--card-border);
+}
+
+.recipe-steps-list {
+    list-style: none;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recipe-steps-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+}
+
+.step-num {
+    background: var(--primary-gradient);
+    color: white;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    margin-top: 2px;
+}
+
+/* Responsive adjustment for Tab layout and recipes */
+@media (max-width: 640px) {
+    .app-nav {
+        gap: 6px;
+        padding: 6px;
+        border-radius: var(--border-radius-sm);
+    }
+    
+    .nav-tab {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .recipes-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .recipe-card {
+        padding: 16px;
+    }
+    
+    .recipe-title-group h3 {
+        font-size: 1rem;
+    }
+    
+    .recipe-icon-el {
+        font-size: 1.6rem;
+    }
+}
+
+/* ======================================================
+   SUPERMARKET GROCERY CHECKLIST SECTION
+   ====================================================== */
+.grocery-card {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.grocery-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #10b981, #14b8a6, #3b82f6);
+}
+
+.grocery-header {
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.grocery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.grocery-cat-box {
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.grocery-cat-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--card-border);
+    padding-bottom: 8px;
+}
+
+.grocery-items-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.grocery-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    padding: 10px 14px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.grocery-item:hover, .grocery-item:active {
+    border-color: var(--primary-color);
+    background: rgba(20, 184, 166, 0.04);
+}
+
+.grocery-check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 2px solid var(--input-border);
+    background: var(--input-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: white;
+    font-size: 0.8rem;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.grocery-item.checked {
+    opacity: 0.55;
+    background: var(--input-bg);
+    border-color: transparent;
+}
+
+.grocery-item.checked .grocery-check-box {
+    background: var(--accent-success);
+    border-color: var(--accent-success);
+}
+
+.grocery-item.checked .grocery-item-name {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.grocery-item-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Adjust tab nav for 4 tabs on mobile */
+@media (max-width: 640px) {
+    .app-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        padding: 6px;
+    }
+    
+    .nav-tab {
+        max-width: 100%;
+        padding: 8px 6px;
+        font-size: 0.78rem;
+    }
+    
+    .grocery-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .grocery-cat-box {
+        padding: 14px;
+    }
 }
