@@ -11,16 +11,16 @@ let groceryState = {}; // "g_item_id" : true/false
 // STATIC DATA
 // =============================================================
 const supplements = {
-  "01": { name: "NAC 600mg", brand: "NOW Foods", dose: "600mg (كبسولة)", target: "يكسر بيوفيلم الكانديدا + يحمي الكبد من سموم die-off" },
-  "02": { name: "Milk Thistle 300mg", brand: "NOW Foods", dose: "300mg (كبسولة)", target: "يحمي خلايا الكبد من سموم الكانديدا الميتة" },
-  "03": { name: "Candida Support", brand: "NOW Foods", dose: "كبسولتان", target: "أوريغانو + كابريليك + باو داركو + جوز أسود" },
-  "04": { name: "Berberine 500mg", brand: "Thorne", dose: "500mg (كبسولة)", target: "يستهدف الكانديدا المقاومة + ينظم السكر" },
-  "06": { name: "S. Boulardii + MOS", brand: "Jarrow", dose: "5B CFU (كبسولة)", target: "يزاحم الكانديدا + يرفع sIgA المنخفض" },
-  "07": { name: "Probiotic Men's 50B", brand: "Garden of Life", dose: "50B CFU (كبسولة)", target: "يعوض Lactobacillus و Bifidobacterium المنهارة" },
-  "08": { name: "L-Glutamine Powder", brand: "NOW Foods", dose: "5g (ملعقة صغيرة)", target: "يرمم Leaky Gut — يستهدف Zonulin 210" },
-  "09": { name: "PepZin GI — Zinc Carnosine", brand: "Doctor's Best", dose: "كبسولتان", target: "يقلل تلف جدار الأمعاء 75% — Calprotectin + Zonulin" },
-  "10": { name: "Colostrum 30% IgG", brand: "Healths Harmony", dose: "كبسولتان", target: "يخفض Zonulin ويرفع sIgA — يرمم الأمعاء والمناعة" },
-  "11": { name: "Cranberry Caps", brand: "NOW Foods", dose: "كبسولتان", target: "يعيد Akkermansia المنهارة (6 فقط!) من 2% إلى 30%+" }
+  "01": { name: "NAC 600mg", brand: "NOW Foods", dose: "600mg (كبسولة)", target: "يكسر بيوفيلم الكانديدا + يحمي الكبد من سموم die-off", timing: "مرتان يومياً مع الوجبتين (01:00 م و 08:30 م)" },
+  "02": { name: "Milk Thistle 300mg", brand: "NOW Foods", dose: "300mg (كبسولة)", target: "يحمي خلايا الكبد من سموم الكانديدا الميتة", timing: "مرتان يومياً مع الوجبتين (01:00 م و 08:30 م)" },
+  "03": { name: "Candida Support", brand: "NOW Foods", dose: "كبسولتان", target: "أوريغانو + كابريليك + باو داركو + جوز أسود", timing: "مع الوجبة الأولى (01:00 م) والوجبة الثانية (08:30 م) مع الطعام دائماً" },
+  "04": { name: "Berberine 500mg", brand: "Thorne", dose: "500mg (كبسولة)", target: "يستهدف الكانديدا المقاومة + ينظم السكر", timing: "3 مرات: مع الوجبتين (01:00 م و 08:30 م) وجرعة منتصف اليوم (05:00 م)" },
+  "06": { name: "S. Boulardii + MOS", brand: "Jarrow", dose: "5B CFU (كبسولة)", target: "يزاحم الكانديدا + يرفع sIgA المنخفض", timing: "منتصف اليوم (05:00 م) وقبل النوم (01:30 ص) — بعيداً عن المضادات الفطرية" },
+  "07": { name: "Probiotic Men's 50B", brand: "Garden of Life", dose: "50B CFU (كبسولة)", target: "يعوض Lactobacillus و Bifidobacterium المنهارة", timing: "قبل النوم مباشرة (01:30 ص) على معدة فارغة — بعد المضادات بـ 5 ساعات لاستعمار مثالي" },
+  "08": { name: "L-Glutamine Powder", brand: "NOW Foods", dose: "5g (ملعقة صغيرة)", target: "يرمم Leaky Gut — يستهدف Zonulin 210", timing: "عند الاستيقاظ (12:00 م) وقبل النوم (01:30 ص) على معدة فارغة مع ماء بارد" },
+  "09": { name: "PepZin GI — Zinc Carnosine", brand: "Doctor's Best", dose: "كبسولتان", target: "يقلل تلف جدار الأمعاء 75% — Calprotectin + Zonulin", timing: "منتصف اليوم (05:00 م) مع سناك خفيف" },
+  "10": { name: "Colostrum 30% IgG", brand: "Healths Harmony", dose: "كبسولتان", target: "يخفض Zonulin ويرفع sIgA — يرمم الأمعاء والمناعة", timing: "عند الاستيقاظ (12:00 م) وقبل النوم (01:30 ص) على معدة فارغة" },
+  "11": { name: "Cranberry Caps", brand: "NOW Foods", dose: "كبسولتان", target: "يعيد Akkermansia المنهارة (6 فقط!) من 2% إلى 30%+", timing: "مع الوجبة الأولى (01:00 م) والوجبة الثانية (08:30 م)" }
 };
 
 const dietGuide = {
@@ -47,30 +47,28 @@ const dietGuide = {
 const daysNames = ["السبت","الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة"];
 
 // =============================================================
-// SCHEDULE DATA PER STAGE
+// SCHEDULE DATA PER STAGE (معدّل وفق نظام النوم الجديد)
 // =============================================================
 function getSchedule(week) {
   if (week <= 2) {
     return [
-      { time: "14:30 — الوجبة الأولى", pills: [{ id:"01", note:"مع أول لقمة" }, { id:"02", note:"مع أول لقمة" }] },
-      { time: "01:00 ص — بعد الوجبة الثانية", pills: [{ id:"01", note:"مع وجبة خفيفة" }, { id:"02", note:"مع وجبة خفيفة" }] }
+      { time: "01:00 م — الوجبة الأولى (الغداء)", pills: [{ id:"01", note:"مع أول لقمة — تفكيك البيوفيلم" }, { id:"02", note:"مع أول لقمة — حماية الكبد" }] },
+      { time: "08:30 م — الوجبة الثانية (العشاء)", pills: [{ id:"01", note:"مع الوجبة — حماية الكبد" }, { id:"02", note:"مع الوجبة — حماية الكبد" }] }
     ];
   } else if (week <= 8) {
     return [
-      { time: "14:30 — الوجبة الأولى",      pills: [{ id:"01", note:"كبسولة" }, { id:"02", note:"كبسولة" }, { id:"03", note:"كبسولتان" }] },
-      { time: "18:00 — منتصف اليقظة",        pills: [{ id:"04", note:"كبسولة مع ماء" }] },
-      { time: "20:00 — بين الوجبتين",        pills: [{ id:"06", note:"بعيداً عن المضادات بساعتين" }] },
-      { time: "23:00 — الوجبة الثانية",      pills: [{ id:"03", note:"كبسولتان" }, { id:"04", note:"كبسولة" }] },
-      { time: "01:00 ص — بعد الوجبة",        pills: [{ id:"01", note:"مع وجبة خفيفة" }, { id:"02", note:"مع وجبة خفيفة" }] },
-      { time: "06:00 ص — قبل النوم",         pills: [{ id:"04", note:"كبسولة" }, { id:"07", note:"بعد المضادات بـ 4 ساعات" }, { id:"06", note:"كبسولة" }] }
+      { time: "01:00 م — الوجبة الأولى (الغداء)",      pills: [{ id:"01", note:"كبسولة — تفكيك البيوفيلم وحماية الكبد" }, { id:"02", note:"كبسولة — حماية خلايا الكبد" }, { id:"03", note:"كبسولتان — مع الطعام دائماً" }, { id:"04", note:"كبسولة — مع الطعام" }] },
+      { time: "05:00 م — منتصف اليقظة (سناك خفيف)",    pills: [{ id:"04", note:"كبسولة مع ماء" }, { id:"06", note:"كبسولة — بعيداً عن المضادات الفطرية بساعتين+" }] },
+      { time: "08:30 م — الوجبة الثانية (العشاء)",      pills: [{ id:"03", note:"كبسولتان — مع الطعام" }, { id:"04", note:"كبسولة — مع الطعام" }, { id:"01", note:"كبسولة — حماية الكبد من Die-Off" }, { id:"02", note:"كبسولة — حماية خلايا الكبد" }] },
+      { time: "01:30 ص — قبل النوم (معدة فارغة)",         pills: [{ id:"07", note:"كبسولة — بعد المضادات بـ 5 ساعات (استعمار ليلي هادئ)" }, { id:"06", note:"كبسولة — تدعيم مناعة الأمعاء sIgA" }] }
     ];
   } else {
     return [
-      { time: "14:00 — عند الاستيقاظ",      pills: [{ id:"10", note:"كبسولتان — معدة فارغة" }, { id:"08", note:"5g في ماء بارد — معدة فارغة" }] },
-      { time: "14:30 — الوجبة الأولى",      pills: [{ id:"01", note:"كبسولة" }, { id:"02", note:"كبسولة" }, { id:"11", note:"كبسولتان" }] },
-      { time: "18:00 — منتصف اليقظة",        pills: [{ id:"06", note:"بين الوجبات" }, { id:"09", note:"كبسولتان مع الطعام" }] },
-      { time: "23:00 — الوجبة الثانية",      pills: [{ id:"01", note:"كبسولة" }, { id:"02", note:"كبسولة" }, { id:"11", note:"كبسولتان" }] },
-      { time: "06:00 ص — قبل النوم",         pills: [{ id:"07", note:"معدة فارغة" }, { id:"08", note:"5g في ماء بارد" }, { id:"10", note:"كبسولتان — معدة فارغة" }] }
+      { time: "12:00 م — عند الاستيقاظ (معدة فارغة)",  pills: [{ id:"10", note:"كبسولتان — معدة فارغة قبل الأكل بساعة" }, { id:"08", note:"5g في ماء بارد — معدة فارغة قبل الأكل بساعة" }] },
+      { time: "01:00 م — الوجبة الأولى (الغداء)",      pills: [{ id:"01", note:"كبسولة — صيانة الكبد" }, { id:"02", note:"كبسولة — صيانة الكبد" }, { id:"11", note:"كبسولتان — تغذية بكتيريا Akkermansia" }] },
+      { time: "05:00 م — منتصف اليقظة (بين الوجبتين)",    pills: [{ id:"06", note:"كبسولة — حماية الأمعاء" }, { id:"09", note:"كبسولتان — التئام بطانة الأمعاء" }] },
+      { time: "08:30 م — الوجبة الثانية (العشاء)",      pills: [{ id:"01", note:"كبسولة — صيانة الكبد" }, { id:"02", note:"كبسولة — صيانة الكبد" }, { id:"11", note:"كبسولتان — تغذية بكتيريا Akkermansia" }] },
+      { time: "01:30 ص — قبل النوم (معدة فارغة)",         pills: [{ id:"07", note:"كبسولة — استعمار ليلي 50B CFU" }, { id:"08", note:"5g في ماء بارد — ترميم ليلي للأمعاء" }, { id:"10", note:"كبسولتان — كبح الزونولين وترميم الأغشية" }] }
     ];
   }
 }
@@ -843,6 +841,17 @@ const groceryDatabase = {
       { id: "g_paprika", name: "بابريكا حلوة" },
       { id: "g_apple_vinegar", name: "خل تفاح عضوي غير مصفى" }
     ]
+  },
+  snacks: {
+    title: "🍿 السناكات والمقرمشات الآمنة",
+    items: [
+      { id: "g_dark_chocolate", name: "شوكولاتة داكنة (85% كاكاو فما فوق)" },
+      { id: "g_popcorn", name: "فشار (ذرة فرقعة بالملح فقط)" },
+      { id: "g_potato_chips", name: "شيبس بطاطس كلاسيكي (ملح فقط - بدون بهارات)" },
+      { id: "g_peanut_butter_jar", name: "زبدة فول سوداني طبيعية (بدون سكر مضاف)" },
+      { id: "g_sunflower_seeds", name: "فستق سوداني أو بذور دوار الشمس مملحة" },
+      { id: "g_rice_cakes", name: "رقائق الأرز (Rice Cakes) سادة" }
+    ]
   }
 };
 
@@ -1091,6 +1100,70 @@ function renderRecipes() {
 }
 
 // =============================================================
+// SUPERMARKET SAFE SNACKS DATABASE & LOGIC
+// =============================================================
+const snacksDatabase = [
+  {
+    title: "شوكولاتة داكنة (85% كاكاو فما فوق)",
+    icon: "🍫",
+    note: "تأكد من أن الكاكاو 85% أو أكثر لضمان عدم وجود سكريات تغذي الكانديدا. الحد المسموح: مربعان في اليوم (حوالي 20 غرام).",
+    brand: "Lindt / Godiva / Ritter Sport"
+  },
+  {
+    title: "رقائق الأرز (Rice Cakes) سادة",
+    icon: "🍘",
+    note: "مصنوعة من الأرز البني أو الأبيض السادة. خالية تماماً من الخميرة والغلوتين والفودماب. يمكنك دهنها بزبدة الفول السوداني الطبيعية.",
+    brand: "Lundberg / Organic Rice Cakes"
+  },
+  {
+    title: "شيبس بطاطس كلاسيكي بالملح",
+    icon: "🥔",
+    note: "اختر النوع الكلاسيكي المكون من 3 عناصر فقط: (بطاطس، زيت نباتي، ملح). تجنب تماماً النكهات المضافة لاحتوائها على بودرة بصل وثوم وخميرة.",
+    brand: "Lays Salted / Kettle Brand Salted"
+  },
+  {
+    title: "فشار مملح بالزيت",
+    icon: "🍿",
+    note: "الفشار من الحبوب الكاملة منخفضة الفودماب والمسموحة. اشترِ ذرة الفشار واصنعه في المنزل بالزيت والملح، أو اشترِ فشار سادة بالملح فقط بدون نكهات.",
+    brand: "فشار سادة بالملح"
+  },
+  {
+    title: "مكسرات نيئة مملحة",
+    icon: "🥜",
+    note: "اللوز (حتى 10 حبات)، الجوز (10 حبات)، الفول السوداني (حتى 32 حبة). تجنب المكسرات النيئة المتبلة ببهارات المطاعم أو الكاجو والفستق الحلبي.",
+    brand: "باجا / المهباج / الرفاعي"
+  },
+  {
+    title: "زبادي يوناني سادة خالي اللاكتوز",
+    icon: "🥛",
+    note: "مصدر بروتين رائع وصديق للأمعاء. تأكد أنه سادة بدون سكر أو فواكه مضافة. يمكنك إضافة 3 حبات فراولة طازجة معه.",
+    brand: "ندى خالي اللاكتوز / المراعي"
+  }
+];
+
+function renderSnacks() {
+  const container = document.getElementById("snacksGrid");
+  if (!container) return;
+  container.innerHTML = "";
+
+  snacksDatabase.forEach(snack => {
+    const card = document.createElement("div");
+    card.className = "snack-card";
+
+    card.innerHTML = `
+      <div class="snack-card-header">
+        <span class="snack-icon-el">${snack.icon}</span>
+        <h3>${snack.title}</h3>
+      </div>
+      <p class="snack-note">${snack.note}</p>
+      <div class="snack-brand-tag">🔹 خيارات شائعة: <strong>${snack.brand}</strong></div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// =============================================================
 // TAB NAVIGATION LOGIC
 // =============================================================
 function initTabs() {
@@ -1134,9 +1207,10 @@ function switchTab(tabId) {
     // Re-render FODMAP elements if needed
     renderFodmapSection();
   } else if (tabId === "recipes") {
-    // Re-render recipes and grocery list if needed
+    // Re-render recipes, snacks and grocery list if needed
     renderRecipes();
     renderGroceryList();
+    renderSnacks();
   }
 }
 
@@ -1162,5 +1236,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderFodmapSection();
   renderRecipes();
   renderGroceryList();
+  renderSnacks();
   initTabs();
 });

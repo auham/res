@@ -1978,3 +1978,95 @@ body.dark-theme .recipe-badge {
         padding: 14px;
     }
 }
+
+/* ======================================================
+   SAFE SNACKS GUIDE SECTION
+   ====================================================== */
+.snacks-card {
+    position: relative;
+    overflow: hidden;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.snacks-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #f59e0b, #10b981, #ef4444);
+}
+
+.snacks-header {
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.snacks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.snack-card {
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all var(--transition-fast);
+}
+
+.snack-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.snack-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.snack-icon-el {
+    font-size: 2.2rem;
+}
+
+.snack-card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.snack-note {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.snack-brand-tag {
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    background: var(--card-bg);
+    padding: 8px 12px;
+    border-radius: var(--border-radius-sm);
+    border: 1px dashed var(--card-border);
+    margin-top: auto;
+}
+
+@media (max-width: 640px) {
+    .snacks-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .snack-card {
+        padding: 16px;
+    }
+}
